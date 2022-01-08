@@ -30,6 +30,11 @@ class Gameboard {
                 return false;
             }
         }
+        if (isVertical) {
+            if ((x + (ship.length - 1)) > 9) {
+                return false;
+            }
+        }
         return true;
     }
 }
