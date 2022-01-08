@@ -25,3 +25,9 @@ it('returns true when placing ship at valid vertical coordinates', () => {
     const ship = new Ship(3);
     expect(gameboard.placeShip(ship, 0, 0, true)).toBe(true);
 });
+
+it('returns false when placing ship at invalid vertical coordinates', () => {
+    const gameboard = new Gameboard();
+    const ship = new Ship(3);
+    expect(gameboard.placeShip(ship, 8, 0, true)).toBe(false);
+});
