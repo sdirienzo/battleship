@@ -40,6 +40,11 @@ class Gameboard {
                 this.#board[x][y] = ship;
             }
         }
+        if (isVertical) {
+            for (x; x < ship.length; x++) {
+                this.#board[x][y] = ship;
+            }
+        }
         return true;
     }
 }
