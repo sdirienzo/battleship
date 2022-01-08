@@ -20,6 +20,10 @@ class Gameboard {
     get board() {
         return this.#board;
     }
+
+    placeShip(ship, coordinates, isVertical) {
+
+    }
 }
 
 export default Gameboard;
