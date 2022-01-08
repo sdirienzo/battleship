@@ -35,6 +35,11 @@ class Gameboard {
                 return false;
             }
         }
+        if (!isVertical) {
+            for (y; y < ship.length; y++) {
+                this.#board[x][y] = ship;
+            }
+        }
         return true;
     }
 }
