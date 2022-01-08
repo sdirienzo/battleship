@@ -46,8 +46,13 @@ class Gameboard {
             }
         }
         if (isVertical) {
-            for (x; x < ship.length; x++) {
-                this.#board[x][y] = ship;
+            for (let index = x; index < x + ship.length; index++) {
+                if (this.#board[index][y] !== null) {
+                    return false;
+                }
+            }
+            for (let index = x; index < x + ship.length; index++) {
+                this.#board[index][y] = ship;
             }
         }
         return true;

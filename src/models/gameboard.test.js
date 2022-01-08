@@ -93,3 +93,19 @@ it('does not place a ship at horizontal coordinates when coordinates occupied', 
     gameboard.placeShip(secondShip, 0, 0, false);
     expect(gameboard.board).toStrictEqual(board);
 });
+
+it('does not place a ship at vertical coordinates when coordinates occupied', () => {
+    const firstShip = new Ship(4);
+    const secondShip = new Ship(3);
+
+    const board = [...Array(10)].map(x => Array(10).fill(null));
+    board[1][2] = firstShip;
+    board[1][3] = firstShip;
+    board[1][4] = firstShip;
+    board[1][5] = firstShip;
+
+    const gameboard = new Gameboard();
+    gameboard.placeShip(firstShip, 1, 2, false);
+    gameboard.placeShip(secondShip, 0, 3, true);
+    expect(gameboard.board).toStrictEqual(board);
+});
