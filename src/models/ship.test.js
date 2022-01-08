@@ -34,4 +34,4 @@ it('does not sink when not hit enough', () => {
         y: 0
     });
     expect(ship.isSunk()).toBe(false);
-})
+});
