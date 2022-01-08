@@ -70,7 +70,12 @@ class Gameboard {
     }
 
     receiveAttack(x, y) {
-
+        if (this.#board[x][y] !== null) {
+            this.#board[x][y].hit({
+                x,
+                y
+            });
+        }
     }
 }
 
