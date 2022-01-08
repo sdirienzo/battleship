@@ -21,41 +21,56 @@ class Gameboard {
         return this.#board;
     }
 
-    placeShip(ship, x, y, isVertical) {
+    isPlacementValid(shipLength, x, y, isVertical) {
         if ((x < 0 || x > 9) || (y < 0 || y > 9)) {
             return false
         }
         if (!isVertical) {
-            if ((y + (ship.length - 1)) > 9) {
+            if ((y + (shipLength - 1)) > 9) {
                 return false;
             }
         }
         if (isVertical) {
-            if ((x + (ship.length - 1)) > 9) {
+            if ((x + (shipLength - 1)) > 9) {
                 return false;
             }
         }
         if (!isVertical) {
-            for (let index = y; index < y + ship.length; index++) {
+            for (let index = y; index < y + shipLength; index++) {
                 if (this.#board[x][index] !== null) {
                     return false;
                 }
             }
+        }
+        if (isVertical) {
+            for (let index = x; index < x + shipLength; index++) {
+                if (this.#board[index][y] !== null) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    placeShip(ship, x, y, isVertical) {
+        if (!this.isPlacementValid(ship.length, x, y, isVertical)) {
+            return false;
+        }
+        if (!isVertical) {
             for (let index = y; index < y + ship.length; index++) {
                 this.#board[x][index] = ship;
             }
         }
         if (isVertical) {
             for (let index = x; index < x + ship.length; index++) {
-                if (this.#board[index][y] !== null) {
-                    return false;
-                }
-            }
-            for (let index = x; index < x + ship.length; index++) {
                 this.#board[index][y] = ship;
             }
         }
         return true;
+    }
+
+    receiveAttack(x, y) {
+
     }
 }
 
