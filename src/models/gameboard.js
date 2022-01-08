@@ -22,10 +22,15 @@ class Gameboard {
     }
 
     placeShip(ship, x, y, isVertical) {
-        if ((x >= 0 && x < 10) && (y >= 0 && y < 10)) {
-            return true;
+        if ((x < 0 || x > 9) || (y < 0 || y > 9)) {
+            return false
         }
-        return false;
+        if (!isVertical) {
+            if ((y + (ship.length - 1)) > 9) {
+                return false;
+            }
+        }
+        return true;
     }
 }
 
