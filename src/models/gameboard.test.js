@@ -9,6 +9,5 @@ it('initializes gameboard with 10 rows', () => {
 it('initializes 10x10 gameboard', () => {
     const array = [...Array(10)].map(x=>Array(10).fill(null))    
     const gameboard = new Gameboard();
-    console.log(gameboard.board);
     expect(gameboard.board).toStrictEqual(array);
 });

@@ -12,7 +12,7 @@ class Gameboard {
         for (let x = 0; x < SIZE; x++) {
             this.#board[x] = [];
             for (let y = 0; y < SIZE; y++) {
-                this.#board[y] = null;
+                this.#board[x][y] = null;
             }
         }
     }
