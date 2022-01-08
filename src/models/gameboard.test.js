@@ -134,6 +134,16 @@ it('receives attack at occupied coordinates', () => {
     expect(ship2.hits).toEqual(ship1.hits);
 });
 
+it('returns false when receives attack at occupied coordinates more than once', () => {
+    const ship = new Ship(4);
+    const gameboard = new Gameboard();
+
+    gameboard.placeShip(ship, 0, 2, false);
+    gameboard.receiveAttack(0, 2);
+
+    expect(gameboard.receiveAttack(0, 2)).toBe(false);
+});
+
 it('does not receive attack at occupied coordinates more than once', () => {
     const ship = new Ship(4);
     const gameboard = new Gameboard();
