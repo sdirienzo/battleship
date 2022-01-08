@@ -54,3 +54,16 @@ it('does not place a ship at invalid horizontal coordinates', () => {
     gameboard.placeShip(ship, 0, 8, false);
     expect(gameboard.board).toStrictEqual(board);
 });
+
+it('places a ship at valid vertical coordinates', () => {
+    const ship = new Ship(3);
+
+    const board = [...Array(10)].map(x => Array(10).fill(null));
+    board[0][0] = ship;
+    board[1][0] = ship;
+    board[2][0] = ship;
+
+    const gameboard = new Gameboard();
+    gameboard.placeShip(ship, 0, 0, true);
+    expect(gameboard.board).toStrictEqual(board);
+});
