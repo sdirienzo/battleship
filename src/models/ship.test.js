@@ -26,3 +26,12 @@ it('stores coordinates of hit', () => {
         y: 0
     });
 });
+
+it('does not sink when not hit enough', () => {
+    const ship = new Ship(2);
+    ship.hit({
+        x: 0,
+        y: 0
+    });
+    expect(ship.isSunk()).toBe(false);
+})

@@ -15,6 +15,9 @@ class Ship {
         this.#hits.push(coordinates);
     }
 
+    isSunk() {
+        
+    }
 }
 
 export default Ship;
