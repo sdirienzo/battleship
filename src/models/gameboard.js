@@ -21,7 +21,7 @@ class Gameboard {
         return this.#board;
     }
 
-    placeShip(ship, coordinates, isVertical) {
+    placeShip(ship, x, y, isVertical) {
 
     }
 }

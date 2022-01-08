@@ -11,9 +11,5 @@ it('initializes 10x10 gameboard', () => {
 it('returns true when placing ship at valid horizontal coordinates', () => {
     const gameboard = new Gameboard();
     const ship = new Ship(3);
-    const coordinates = {
-        x: 0,
-        y: 0
-    };
-    expect(gameboard.placeShip(ship, coordinates, false)).toBe(true);
+    expect(gameboard.placeShip(ship, 0, 0, false)).toBe(true);
 });
