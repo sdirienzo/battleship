@@ -1,10 +1,14 @@
 class Ship {
-    length;
+    #length;
 
     #hits = [];
 
     constructor(length) {
-        this.length = length;
+        this.#length = length;
+    }
+
+    get length() {
+        return this.#length;
     }
 
     get hits() {
