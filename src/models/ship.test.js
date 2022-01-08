@@ -35,3 +35,16 @@ it('does not sink when not hit enough', () => {
     });
     expect(ship.isSunk()).toBe(false);
 });
+
+it('does sink when hit enough', () => {
+    const ship = new Ship(2);
+    ship.hit({
+        x: 0,
+        y: 0
+    });
+    ship.hit({
+        x: 1,
+        y: 0
+    });
+    expect(ship.isSunk()).toBe(true);
+});
