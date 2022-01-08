@@ -11,8 +11,8 @@ class Ship {
         return this.#hits;
     }
 
-    hit() {
-
+    hit(coordinates) {
+        this.#hits.push(coordinates);
     }
 
 }
