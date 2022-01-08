@@ -150,6 +150,7 @@ it('does not receive attack at occupied coordinates more than once', () => {
 
     gameboard.placeShip(ship, 0, 2, false);
     gameboard.receiveAttack(0, 2);
+    gameboard.receiveAttack(0, 2)
 
-    expect(gameboard.receiveAttack(0, 2)).toBe(false);
+    expect(ship.hits.length).toBe(1);
 });
