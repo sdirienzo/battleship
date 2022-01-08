@@ -110,6 +110,15 @@ it('does not place a ship at vertical coordinates when coordinates occupied', ()
     expect(gameboard.board).toStrictEqual(board);
 });
 
+it('returns true when receives attack at occupied coordinates', () => {
+    const ship = new Ship(4);
+
+    const gameboard = new Gameboard();
+    gameboard.placeShip(ship, 0, 2, false);
+    
+    expect(gameboard.receiveAttack(0, 2)).toBe(true);
+});
+
 it('receives attack at occupied coordinates', () => {
     const ship1 = new Ship(4);
     const ship2 = new Ship(4);
