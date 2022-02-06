@@ -176,3 +176,42 @@ it('reports not all ships have been sunk', () => {
 
     expect(gameboard.allShipsAreSunk()).toBe(false);
 });
+
+it('reports all ships have been sunk', () => {
+    const carrier = new Ship(5);
+    const battleship = new Ship(4);
+    const destroyer = new Ship(3);
+    const submarine = new Ship(3);
+    const patrolBoat = new Ship(2);
+
+    const gameboard = new Gameboard();
+    gameboard.placeShip(carrier, 9, 4, false);
+    gameboard.placeShip(battleship, 2, 0, true);
+    gameboard.placeShip(destroyer, 2, 5, false);
+    gameboard.placeShip(submarine, 5, 9, true);
+    gameboard.placeShip(patrolBoat, 0, 0, false);
+
+    gameboard.receiveAttack(9, 4);
+    gameboard.receiveAttack(9, 5);
+    gameboard.receiveAttack(9, 6);
+    gameboard.receiveAttack(9, 7);
+    gameboard.receiveAttack(9, 8);
+
+    gameboard.receiveAttack(2, 0);
+    gameboard.receiveAttack(3, 0);
+    gameboard.receiveAttack(4, 0);
+    gameboard.receiveAttack(5, 0);
+
+    gameboard.receiveAttack(2, 5);
+    gameboard.receiveAttack(2, 6);
+    gameboard.receiveAttack(2, 7);
+
+    gameboard.receiveAttack(5, 9);
+    gameboard.receiveAttack(6, 9);
+    gameboard.receiveAttack(7, 9);
+
+    gameboard.receiveAttack(0, 0);
+    gameboard.receiveAttack(0, 1);
+
+    expect(gameboard.allShipsAreSunk()).toBe(true);
+});
