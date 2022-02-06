@@ -21,6 +21,20 @@ class Gameboard {
         return this.#board;
     }
 
+    allShipsAreSunk() {
+        for (let x = 0; x < SIZE; x++) {
+            for (let y = 0; y < SIZE; y++) {
+                if (this.#board[x][y] !== null && this.#board[x][y] !== -1) {
+                    if (!this.#board[x][y].isSunk()) {
+                        return false;
+                    }
+                } 
+            }
+        }
+
+        return true;
+    }
+
     isPlacementValid(shipLength, x, y, isVertical) {
         if ((x < 0 || x > 9) || (y < 0 || y > 9)) {
             return false
