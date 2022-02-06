@@ -149,3 +149,13 @@ it('does not receive attack at occupied coordinates more than once', () => {
 
     expect(ship.hits.length).toBe(1);
 });
+
+it('tracks missed attacks', () => {
+    const board = [...Array(10)].map(x => Array(10).fill(null));
+    board[0][2] = -1;
+
+    const gameboard = new Gameboard();
+    gameboard.receiveAttack(0, 2);
+    
+    expect(gameboard.board).toStrictEqual(board);
+});
