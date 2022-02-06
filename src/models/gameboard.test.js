@@ -159,3 +159,20 @@ it('tracks missed attacks', () => {
     
     expect(gameboard.board).toStrictEqual(board);
 });
+
+it('reports not all ships have been sunk', () => {
+    const carrier = new Ship(5);
+    const battleship = new Ship(4);
+    const destroyer = new Ship(3);
+    const submarine = new Ship(3);
+    const patrolBoat = new Ship(2);
+
+    const gameboard = new Gameboard();
+    gameboard.placeShip(carrier, 4, 9, false);
+    gameboard.placeShip(battleship, 0, 2, true);
+    gameboard.placeShip(destroyer, 5, 2, false);
+    gameboard.placeShip(submarine, 9, 5, true);
+    gameboard.placeShip(patrolBoat, 0, 0, false);
+
+    expect(gameboard.allShipsAreSunk()).toBe(false);
+});
