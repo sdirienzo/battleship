@@ -10,6 +10,14 @@ class Player {
         return this.#isHuman;
     }
 
+    makeRandomAttack(gameboard) {
+        return;
+    }
+
+    takeTurn(x, y) {
+        return;
+    }
+
 }
 
 export default Player;
