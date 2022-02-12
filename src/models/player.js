@@ -14,7 +14,10 @@ class Player {
         return;
     }
 
-    takeTurn(x, y) {
+    takeTurn(gameboard, x, y) {
+        if (gameboard.receiveAttack(x, y)) {
+            return true;
+        }
         return;
     }
 

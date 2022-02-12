@@ -29,6 +29,6 @@ it('allows player to take valid turn with occupied coordinate', () => {
     gameboard.placeShip(submarine, 5, 9, true);
     gameboard.placeShip(patrolBoat, 0, 0, false);
 
-    expect(humanPlayer.takeTurn(0, 0)).toBe(true);
+    expect(humanPlayer.takeTurn(gameboard, 0, 0)).toBe(true);
 
 });
