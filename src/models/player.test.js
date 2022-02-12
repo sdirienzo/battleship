@@ -71,3 +71,24 @@ it('doesn\'t allow player to take invalid turn with already attacked occupied co
 
     expect(humanPlayer.takeTurn(gameboard, 0, 0)).toBe(false);
 });
+
+it('doesn\'t allow player to take invalid turn with already attacked unoccupied coordinate', () => {
+    const humanPlayer = new Player(true);
+    const gameboard = new Gameboard();
+
+    const carrier = new Ship(5);
+    const battleship = new Ship(4);
+    const destroyer = new Ship(3);
+    const submarine = new Ship(3);
+    const patrolBoat = new Ship(2);
+
+    gameboard.placeShip(carrier, 9, 4, false);
+    gameboard.placeShip(battleship, 2, 0, true);
+    gameboard.placeShip(destroyer, 2, 5, false);
+    gameboard.placeShip(submarine, 5, 9, true);
+    gameboard.placeShip(patrolBoat, 0, 0, false);
+
+    humanPlayer.takeTurn(gameboard, 0, 2);
+
+    expect(humanPlayer.takeTurn(gameboard, 0, 2)).toBe(false);
+});
