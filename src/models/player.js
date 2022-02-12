@@ -15,10 +15,9 @@ class Player {
     }
 
     takeTurn(gameboard, x, y) {
-        if (gameboard.receiveAttack(x, y)) {
-            return true;
+        if (this.#isHuman) {
+            return gameboard.receiveAttack(x, y);
         }
-        return false;
     }
 
 }
