@@ -18,7 +18,7 @@ class Player {
         if (gameboard.receiveAttack(x, y)) {
             return true;
         }
-        return;
+        return false;
     }
 
 }

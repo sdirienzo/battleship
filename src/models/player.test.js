@@ -67,7 +67,7 @@ it('doesn\'t allow player to take invalid turn with already attacked occupied co
     gameboard.placeShip(submarine, 5, 9, true);
     gameboard.placeShip(patrolBoat, 0, 0, false);
 
-    humanPlayer.takeTurn(gameboard, 0, 2);
+    humanPlayer.takeTurn(gameboard, 0, 0);
 
-    expect(humanPlayer.takeTurn(gameboard, 0, 2)).toBe(false);
+    expect(humanPlayer.takeTurn(gameboard, 0, 0)).toBe(false);
 });
