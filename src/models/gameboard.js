@@ -1,4 +1,3 @@
-
 const SIZE = 10;
 
 class Gameboard {   
