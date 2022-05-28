@@ -1,0 +1,79 @@
+@font-face {
+  font-family: 'Chakra Petch';
+  src: 
+    url('../assets/fonts/ChakraPetch-Bold.ttf');
+}
+
+:root {
+  --board-rows: 0;
+  --board-columns: 0;
+  --cell-height: 0px;
+  --cell-width: 0px;
+}
+
+body {
+  box-sizing: border-box;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+#content {
+  height: 100%;
+  display: grid;
+  grid-template-rows: 250px auto;
+}
+
+#header-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 48px;
+  font-family: 'Chakra Petch', sans-serif;
+}
+
+#main-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: min-content;
+  column-gap: 50px;
+}
+
+#human-board-section {
+  display: flex;
+  justify-content: flex-end;
+}
+
+#computer-board-section {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.board {
+  display: grid;
+  grid-template-rows: repeat(var(--board-rows), var(--cell-height));
+  grid-template-columns: repeat(var(--board-columns), var(--cell-width));
+  border-bottom: 1px solid black;
+  border-left: 1px solid black;
+}
+
+.cell {
+  border-top: 1px solid black;
+  border-right: 1px solid black;
+}
+
+.ship {
+  background-color: #94a3b8;
+}
+
+.available {
+  cursor: pointer;
+}
+
+.miss {
+  background-color: #4ade80;
+}
+
+.hit {
+  background-color: #f87171;
+}
