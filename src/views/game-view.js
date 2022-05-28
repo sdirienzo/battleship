@@ -91,6 +91,8 @@ class GameView {
         for (let x = 0; x < payload.gameboard.length; x++) {
             for (let y = 0; y < payload.gameboard[0].length; y++) {
                 let newDiv = document.createElement("div");
+                newDiv.dataset.x = x;
+                newDiv.dataset.y = y;
                 newDiv.classList.add("cell");
                 if (payload.gameboard[x][y] === null) {
                     newDiv.classList.add("empty");
@@ -101,9 +103,14 @@ class GameView {
                 } else {
                     for (let hit of payload.gameboard[x][y].hits) {
                         if (hit.x === x && hit.y === y) {
+                            if (newDiv.classList.contains("ship")) {
+                                newDiv.classList.remove("ship");
+                            }
                             newDiv.classList.add("hit");
                         } else {
-                            newDiv.classList.add("ship");
+                            if (!newDiv.classList.contains("hit")) {
+                               newDiv.classList.add("ship");
+                            }
                         }
                     }
                 }
@@ -119,6 +126,8 @@ class GameView {
         for (let x = 0; x < payload.gameboard.length; x++) {
             for (let y = 0; y < payload.gameboard[0].length; y++) {
                 let newDiv = document.createElement("div");
+                newDiv.dataset.x = x;
+                newDiv.dataset.y = y;
                 newDiv.classList.add("cell");
                 if (payload.gameboard[x][y] === null) {
                     newDiv.classList.add("available");
@@ -128,11 +137,15 @@ class GameView {
                      newDiv.classList.add("available");
                 } else {
                     for (let hit of payload.gameboard[x][y].hits) {
-                        console.log(hit);
                         if (hit.x === x && hit.y === y) {
+                            if (newDiv.classList.contains('available')) {
+                                newDiv.classList.remove('available');
+                            }
                             newDiv.classList.add("hit");
                         } else {
-                            newDiv.classList.add("available");
+                            if (!newDiv.classList.contains("hit")) {
+                                newDiv.classList.add("available");
+                            }
                         }
                     }
                 }
@@ -147,7 +160,14 @@ class GameView {
     }
 
     applyEventListeners() {
-
+        this.computerPlayerBoard.addEventListener('click', ({ target }) => {
+            if (target.classList.contains('available')) {
+                const attackPayload = {};
+                attackPayload.x = parseInt(target.dataset.x);
+                attackPayload.y = parseInt(target.dataset.y);
+                this.pubSub.publish('attack-made', attackPayload);
+            }
+        });
     }
 
 }

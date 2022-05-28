@@ -24,26 +24,14 @@ class GameModel {
     }
 
     subscribeModel() {
-        // this.pubSub.subscribe('add-list', this.addList.bind(this));
-        // this.pubSub.subscribe('delete-list', this.deleteList.bind(this));
-        // this.pubSub.subscribe('add-todo-to-list', this.addToDo.bind(this));
-        // this.pubSub.subscribe('remove-todo-from-list', this.removeToDo.bind(this));
-
-        // if (this.lists.length === 0) {
-        //     const defaultList = {};
-        //     defaultList.name = 'Reminders';
-        //     defaultList.color = '#FF9F0C';
-        //     this.pubSub.publish('add-list', defaultList);
-        // } else {
-        //     this.pubSub.publish('display-list', this.lists[0]);
-        //     this.pubSub.publish('display-lists', this.lists);
-        // }
         let humanPayload = {};
         humanPayload.gameboard = this.humanGameboard.board;
         let computerPayload = {};
         computerPayload.gameboard = this.computerGameboard.board;
         this.pubSub.publish("display-human-board", humanPayload);
         this.pubSub.publish("display-computer-board", computerPayload);
+
+        this.pubSub.subscribe('attack-made', this.receiveAttack.bind(this));
     }
 
     getRandomInt(min, max) {
@@ -92,6 +80,15 @@ class GameModel {
         this.randomlyPlaceShip(this.computerGameboard, destroyer);
         this.randomlyPlaceShip(this.computerGameboard, submarine);
         this.randomlyPlaceShip(this.computerGameboard, patrolBoat);
+    }
+
+    receiveAttack(msg, attackCoordinates) {
+        this.computerGameboard.receiveAttack(attackCoordinates.x, attackCoordinates.y);
+        
+        let computerPayload = {};
+        computerPayload.gameboard = this.computerGameboard.board;
+
+        this.pubSub.publish("display-computer-board", computerPayload);
     }
 
 }
