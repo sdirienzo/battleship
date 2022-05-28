@@ -50,7 +50,7 @@ class GameView {
     subscribeView() {
         this.pubSub.subscribe('display-human-board', this.displayHumanPlayerBoard.bind(this));
         this.pubSub.subscribe('display-computer-board', this.displayComputerPlayerBoard.bind(this));
-        this.pubSub.subscribe('display-winner', this.displayWinner.bind(this));
+        this.pubSub.subscribe('game-over', this.displayWinner.bind(this));
 
         this.applyEventListeners();
     }
@@ -156,7 +156,12 @@ class GameView {
     }
 
     displayWinner(msg, payload) {
-
+        if (payload.isHuman) {
+            alert("Congratulations, you won!");
+        } else {
+            alert("Sorry, you lost...");
+        }
+        this.pubSub.publish('start-new-game');
     }
 
     applyEventListeners() {

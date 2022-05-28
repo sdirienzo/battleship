@@ -24,14 +24,19 @@ class GameModel {
     }
 
     subscribeModel() {
+        this.start();
+        this.pubSub.subscribe("attack-made", this.playRound.bind(this));
+        this.pubSub.subscribe("start-new-game", this.init.bind(this));
+        this.pubSub.subscribe("start-new-game", this.start.bind(this));
+    }
+
+    start() {
         let humanPayload = {};
         humanPayload.gameboard = this.humanGameboard.board;
         let computerPayload = {};
         computerPayload.gameboard = this.computerGameboard.board;
         this.pubSub.publish("display-human-board", humanPayload);
         this.pubSub.publish("display-computer-board", computerPayload);
-
-        this.pubSub.subscribe('attack-made', this.receiveAttack.bind(this));
     }
 
     getRandomInt(min, max) {
@@ -82,13 +87,55 @@ class GameModel {
         this.randomlyPlaceShip(this.computerGameboard, patrolBoat);
     }
 
-    receiveAttack(msg, attackCoordinates) {
-        this.computerGameboard.receiveAttack(attackCoordinates.x, attackCoordinates.y);
-        
-        let computerPayload = {};
-        computerPayload.gameboard = this.computerGameboard.board;
+    applyComputerAttack() {
+        this.computerPlayer.makeRandomAttack(this.humanGameboard);
 
+        let humanPayload = {};
+        humanPayload.gameboard = this.humanGameboard.board;
+
+        this.pubSub.publish("display-human-board", humanPayload);
+    }
+
+    takeHumanTurn(x, y) {
+        this.humanPlayer.takeTurn(this.computerGameboard, x, y);
+    }
+
+    takeComputerTurn() {
+        this.computerPlayer.takeTurn(this.humanGameboard);
+    }
+
+    allComputerShipsAreSunk() {
+        return this.computerGameboard.allShipsAreSunk();
+    }
+
+    allHumanShipsAreSunk() {
+        return this.humanGameboard.allShipsAreSunk();
+    }
+
+    playRound(msg, attackCoordinates) {
+        let computerPayload = {};
+        let humanPayload = {};
+        let winner = {};
+
+        this.takeHumanTurn(attackCoordinates.x, attackCoordinates.y);
+        computerPayload.gameboard = this.computerGameboard.board;
         this.pubSub.publish("display-computer-board", computerPayload);
+
+        if (this.allComputerShipsAreSunk()) {
+            winner.isHuman = this.humanPlayer.isHuman;
+            this.pubSub.publish("game-over", winner);
+            return;
+        }     
+
+        this.takeComputerTurn();
+        humanPayload.gameboard = this.humanGameboard.board;
+        this.pubSub.publish("display-human-board", humanPayload);
+
+        if (this.allHumanShipsAreSunk()) {
+            winner.isHuman = this.computerPlayer.isHuman;
+            this.pubSub.publish("game-over", winner);
+            return;
+        }
     }
 
 }
