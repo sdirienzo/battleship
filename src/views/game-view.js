@@ -22,6 +22,11 @@ class GameView {
         this.titleSecion = this.createElement('div');
         this.titleSecion.id = 'header-section';
 
+        let title = this.createElement('h1');
+        title.innerText = 'BATTLESHIP';
+
+        this.titleSecion.append(title);
+
         this.mainSection = this.createElement('div');
         this.mainSection.id = 'main-section';
 

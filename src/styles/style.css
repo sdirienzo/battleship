@@ -1,3 +1,9 @@
+@font-face {
+  font-family: 'Chakra Petch';
+  src: 
+    url('../assets/fonts/ChakraPetch-Bold.ttf');
+}
+
 :root {
   --board-rows: 0;
   --board-columns: 0;
@@ -19,7 +25,11 @@ body {
 }
 
 #header-section {
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 48px;
+  font-family: 'Chakra Petch', sans-serif;
 }
 
 #main-section {
